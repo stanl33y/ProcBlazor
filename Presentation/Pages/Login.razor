@@ -1,0 +1,45 @@
+﻿@page "/login"
+@using ProcBlazor.Application.DTOs
+@using ProcBlazor.Domain.Entities
+@inject NavigationManager NavigationManager
+@inject HttpClient HttpClient
+@inject IJSRuntime JSRuntime
+
+<h3>Login</h3>
+
+<EditForm Model="loginModel" OnValidSubmit="HandleLogin">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="form-group">
+        <label>Email:</label>
+        <InputText id="email" @bind-Value="loginModel.Email" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Senha:</label>
+        <InputText id="senha" @bind-Value="loginModel.Senha" type="password" class="form-control" />
+    </div>
+    <p class="alert alert-danger pt-1">@erro</p>
+    <button type="submit" class="btn btn-primary">Entrar</button>
+    
+</EditForm>
+
+@code {
+    private LoginDTO loginModel = new LoginDTO();
+    private string erro = string.Empty;
+
+    private async Task HandleLogin()
+    {
+        var response = await HttpClient.PostAsJsonAsync("api/v1/auth/login", loginModel);
+        if (response.IsSuccessStatusCode)
+        {
+            var responseContent = await response.Content.ReadFromJsonAsync<LoginResponseDTO>();
+            await JSRuntime.InvokeVoidAsync("localStorage.setItem", "authToken", responseContent.Token);
+
+            NavigationManager.NavigateTo("/");
+        }
+        else
+        {
+            erro = "Usuário ou senha inválidos";
+        }
+    }
+}

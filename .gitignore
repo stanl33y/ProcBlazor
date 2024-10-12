@@ -1,0 +1,91 @@
+# Compiled object files
+*.o
+*.obj
+
+# Compiled DLL files
+*.dll
+
+# Compiled LIB files
+*.lib
+
+# Temporary files
+*.tmp
+*.temp
+
+# Build results
+[Bb]in/
+[Oo]bj/
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Mono Auto Generated Files
+mono_crash.*
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# VS Code files
+.vscode/
+
+# Rider project files
+.idea/
+*.sln.iml
+
+# Log files
+*.log
+
+# NuGet Packages
+*.nupkg
+# The packages folder can be ignored because of the presence of 'project.json' (NuGet restore)
+**/packages/
+# Except build/, which is used as an MSBuild target.
+!**/packages/build/
+# Uncomment if necessary however generally it will be regenerated when needed
+#!**/packages/repositories.config
+
+# Azure Web App publish settings. Comment out if the file is to be included in source control.
+PublishProfiles/
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# JetBrains Rider
+.idea/
+*.sln.iml
+
+# Local History for Rider
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/dictionaries
+.idea/vcs.xml
+.idea/jsLibraryMappings.xml
+
+# Rider to ignore files from non-dotnet environments
+.idea/.rider/
+.idea/.idea/
+
+# Windows crash reports
+*.stackdump
+
+# Windows shortcuts
+*.lnk
+
+# Environment file
+.env
