@@ -89,3 +89,6 @@ ScaffoldingReadMe.txt
 
 # Environment file
 .env
+
+# Visual Studio
+.vs/

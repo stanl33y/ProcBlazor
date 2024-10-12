@@ -40,7 +40,7 @@ public class UsuarioController : Controller
     public async Task<IActionResult> Add(Usuario usuario)
     {
         await _usuarioService.AddAsync(usuario);
-        return CreatedAtAction(nameof(GetById), new { id = usuario.Id }, usuario);
+        return Created();
     }
 
     [HttpPut("{id}")]

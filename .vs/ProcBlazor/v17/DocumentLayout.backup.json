@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\stanl\\ProcBlazor\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{AA9CF19F-4C50-4318-A950-3F5973200BCE}|Presentation\\ProcBlazor.Presentation.csproj|c:\\users\\stanl\\procblazor\\presentation\\pages\\home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{AA9CF19F-4C50-4318-A950-3F5973200BCE}|Presentation\\ProcBlazor.Presentation.csproj|solutionrelative:presentation\\pages\\home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{F7C6E850-BE9A-4C95-9EB2-1C1F3EED8CCF}|Api\\ProcBlazor.Api.csproj|c:\\users\\stanl\\procblazor\\api\\controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F7C6E850-BE9A-4C95-9EB2-1C1F3EED8CCF}|Api\\ProcBlazor.Api.csproj|solutionrelative:api\\controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AA9CF19F-4C50-4318-A950-3F5973200BCE}|Presentation\\ProcBlazor.Presentation.csproj|c:\\users\\stanl\\procblazor\\presentation\\pages\\cadastro.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{AA9CF19F-4C50-4318-A950-3F5973200BCE}|Presentation\\ProcBlazor.Presentation.csproj|solutionrelative:presentation\\pages\\cadastro.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{AA9CF19F-4C50-4318-A950-3F5973200BCE}|Presentation\\ProcBlazor.Presentation.csproj|c:\\users\\stanl\\procblazor\\presentation\\pages\\login.razor.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{AA9CF19F-4C50-4318-A950-3F5973200BCE}|Presentation\\ProcBlazor.Presentation.csproj|solutionrelative:presentation\\pages\\login.razor.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AA9CF19F-4C50-4318-A950-3F5973200BCE}|Presentation\\ProcBlazor.Presentation.csproj|c:\\users\\stanl\\procblazor\\presentation\\pages\\login.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{AA9CF19F-4C50-4318-A950-3F5973200BCE}|Presentation\\ProcBlazor.Presentation.csproj|solutionrelative:presentation\\pages\\login.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -23,28 +27,39 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Home.razor",
-              "DocumentMoniker": "C:\\Users\\stanl\\ProcBlazor\\Presentation\\Pages\\Home.razor",
-              "RelativeDocumentMoniker": "Presentation\\Pages\\Home.razor",
-              "ToolTip": "C:\\Users\\stanl\\ProcBlazor\\Presentation\\Pages\\Home.razor",
-              "RelativeToolTip": "Presentation\\Pages\\Home.razor",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-12T01:35:55.967Z",
+              "Title": "UsuarioController.cs",
+              "DocumentMoniker": "C:\\Users\\stanl\\ProcBlazor\\Api\\Controllers\\UsuarioController.cs",
+              "RelativeDocumentMoniker": "Api\\Controllers\\UsuarioController.cs",
+              "ToolTip": "C:\\Users\\stanl\\ProcBlazor\\Api\\Controllers\\UsuarioController.cs",
+              "RelativeToolTip": "Api\\Controllers\\UsuarioController.cs",
+              "ViewState": "AgIAACMAAAAAAAAAAAAwwCkAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-12T16:15:56.795Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Cadastro.razor",
-              "DocumentMoniker": "C:\\Users\\stanl\\ProcBlazor\\Presentation\\Pages\\Cadastro.razor",
-              "RelativeDocumentMoniker": "Presentation\\Pages\\Cadastro.razor",
-              "ToolTip": "C:\\Users\\stanl\\ProcBlazor\\Presentation\\Pages\\Cadastro.razor",
-              "RelativeToolTip": "Presentation\\Pages\\Cadastro.razor",
-              "ViewState": "AgIAABUAAAAAAAAAAAAAACEAAAAzAAAAAAAAAA==",
+              "Title": "Login.razor.css",
+              "DocumentMoniker": "C:\\Users\\stanl\\ProcBlazor\\Presentation\\Pages\\Login.razor.css",
+              "RelativeDocumentMoniker": "Presentation\\Pages\\Login.razor.css",
+              "ToolTip": "C:\\Users\\stanl\\ProcBlazor\\Presentation\\Pages\\Login.razor.css",
+              "RelativeToolTip": "Presentation\\Pages\\Login.razor.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2024-10-12T12:42:55.942Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Login.razor",
+              "DocumentMoniker": "C:\\Users\\stanl\\ProcBlazor\\Presentation\\Pages\\Login.razor",
+              "RelativeDocumentMoniker": "Presentation\\Pages\\Login.razor",
+              "ToolTip": "C:\\Users\\stanl\\ProcBlazor\\Presentation\\Pages\\Login.razor",
+              "RelativeToolTip": "Presentation\\Pages\\Login.razor",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABIAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-12T01:35:35.538Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-12T12:33:08.649Z"
             }
           ]
         }

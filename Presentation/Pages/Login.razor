@@ -5,23 +5,34 @@
 @inject HttpClient HttpClient
 @inject IJSRuntime JSRuntime
 
-<h3>Login</h3>
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="col-12 col-sm-12 col-md-6 col-lg-3">
+        <h3 class="title">Login</h3>
 
-<EditForm Model="loginModel" OnValidSubmit="HandleLogin">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
-    <div class="form-group">
-        <label>Email:</label>
-        <InputText id="email" @bind-Value="loginModel.Email" class="form-control" />
+        <EditForm Model="loginModel" OnValidSubmit="HandleLogin">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <InputText id="email" @bind-Value="loginModel.Email" class="form-control" />
+            </div>
+            <div class="form-group mt-1">
+                <label for="senha">Senha:</label>
+                <InputText id="senha" @bind-Value="loginModel.Senha" type="password" class="form-control" />
+            </div>
+            @if (erro != string.Empty)
+            {
+                <p class="alert alert-danger mt-1 p-1">@erro</p>
+            }
+
+            <button type="submit" class="btn btn-primary mt-2">Entrar</button>
+
+        </EditForm>
     </div>
-    <div class="form-group">
-        <label>Senha:</label>
-        <InputText id="senha" @bind-Value="loginModel.Senha" type="password" class="form-control" />
-    </div>
-    <p class="alert alert-danger pt-1">@erro</p>
-    <button type="submit" class="btn btn-primary">Entrar</button>
-    
-</EditForm>
+</div>
+
+
+
 
 @code {
     private LoginDTO loginModel = new LoginDTO();
