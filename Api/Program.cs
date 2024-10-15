@@ -1,5 +1,4 @@
 using ProcBlazor.Application.Services;
-using ProcBlazor.Infrastructure.Repositories;
 using ProcBlazor.Domain.Repositories;
 using ProcBlazor.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -34,6 +33,7 @@ builder.Services.AddCors(options =>
 
 // Services
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+builder.Services.AddScoped<IMensagemUsuarioService, MensagemUsuarioService>();
 builder.Services.AddScoped<IJwtAuthenticationService, JwtAuthenticationService>();
 
 // SQL
@@ -98,13 +98,17 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         {
             ValidateIssuer = true,
             ValidateAudience = true,
-            ValidateLifetime = true,
+            ValidateLifetime = false,
             ValidateIssuerSigningKey = true,
             ValidIssuer = jwtIssuer,
             ValidAudience = jwtAudience,
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
         };
     });
+
+builder.Services.AddAuthorization();
+
+builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 
@@ -120,6 +124,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

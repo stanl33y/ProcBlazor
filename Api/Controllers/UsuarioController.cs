@@ -5,16 +5,18 @@ using ProcBlazor.Domain.Entities;
 
 namespace ProcBlazor.Api.Controllers;
 
-[ApiController]
 [Authorize]
+[ApiController]
 [Route("api/v1/[controller]")]
 public class UsuarioController : Controller
 {
     private readonly IUsuarioService _usuarioService;
 
+
     public UsuarioController(IUsuarioService usuarioService)
     {
         _usuarioService = usuarioService;
+
     }
 
     [HttpGet]

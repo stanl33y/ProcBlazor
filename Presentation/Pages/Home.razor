@@ -1,33 +1,10 @@
-﻿@page "/"
-@inject NavigationManager NavigationManager
+﻿@page "/inicio"
+@using System.Web.Http
+@attribute [Authorize]
 
-<PageTitle>Home</PageTitle>
+<PageTitle>ProcBlazor - Início</PageTitle>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">ProcBlazor</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Usuarios</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Sair</a>
-            </li>
-        </ul>
-    </div>
-</nav>
-
-<button class="btn btn-primary" @onclick="Login">Login</button>
-<button class="btn btn-info" @onclick="Cadastro">Cadastrar</button>
+<p>Página home/início</p>
 
 @code {
-    private void Login() => NavigationManager.NavigateTo("/login");
-    private void Cadastro() => NavigationManager.NavigateTo("/cadastro");
 }

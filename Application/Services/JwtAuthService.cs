@@ -7,7 +7,7 @@ using System.Text;
 namespace ProcBlazor.Application.Services;
 public interface IJwtAuthenticationService
 {
-    string GenerateToken(string username, string role);
+    string GenerateToken(string username, string name, string role);
 }
 
 public class JwtAuthenticationService : IJwtAuthenticationService
@@ -19,7 +19,7 @@ public class JwtAuthenticationService : IJwtAuthenticationService
         _configuration = configuration;
     }
 
-    public string GenerateToken(string username, string role)
+    public string GenerateToken(string username, string name, string role)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
         var jwtKey = _configuration["Jwt:Key"];
@@ -48,9 +48,11 @@ public class JwtAuthenticationService : IJwtAuthenticationService
         {
             Subject = new ClaimsIdentity(new[]
             {
-                new Claim(ClaimTypes.Name, username),
+                new Claim("name", name),
+                new Claim("email", username),
                 new Claim(ClaimTypes.Role, role)
             }),
+
             Expires = DateTime.UtcNow.AddMinutes(double.Parse(jwtExpirationInMinutes)),
             Issuer = jwtIssuer,
             Audience = jwtAudience,

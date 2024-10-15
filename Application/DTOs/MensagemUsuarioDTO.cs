@@ -1,0 +1,12 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ProcBlazor.Application.DTOs;
+
+public class MensagemUsuarioDTO
+{
+    public required string Mensagem { get; set; }
+}

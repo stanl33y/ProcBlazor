@@ -1,0 +1,145 @@
+﻿@page "/mensagens"
+@attribute [Authorize]
+
+@using Microsoft.AspNetCore.Authorization
+@using ProcBlazor.Application.DTOs
+@using ProcBlazor.Domain.Entities;
+@using ProcBlazor.Application.Services;
+@using System.Net.Http;
+@using System.Net.Http.Json;
+@using System.Globalization
+@inject HttpClient Http
+
+<PageTitle>ProcBlazor - Mensagens</PageTitle>
+
+<div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder="Filtrar mensagens..." @oninput="@(async (e) => OnInputChanged(e))" />
+</div>
+
+<div class="list-group mb-3 overflow-auto" style="height: 300px;" @ref="_referenciaContainerMensagens">
+    @foreach (var mensagem in _mensagensFiltradas)
+    {
+        <div class="list-group-item">
+            <div class="d-flex w-100 justify-content-between">
+                <strong>@mensagem.NomeUsuario</strong>
+                <div class="d-flex justify-content-center align-items-center">
+                    <small>@mensagem.DataHora.ToString("dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture)</small>
+                    <button class="btn btn-danger btn-sm btn-round ml-2" @onclick="() => RemoverMensagem(mensagem.Id)">x</button>
+                </div>
+            </div>
+            <p class="mb-1">@mensagem.Mensagem</p>
+            
+        </div>
+    }
+</div>
+
+<div class="input-group">
+    <input type="text" class="form-control" @bind="_conteudoNovaMensagem" placeholder="Digite sua mensagem..." />
+    <button class="btn btn-success" @onclick="EnviarMensagem">Enviar</button>
+</div>
+
+@code {
+    private string _erro = "";
+    private string _textoFiltro = "";
+    private string _conteudoNovaMensagem = "";
+    private List<MensagemUsuarioListaDTO> _mensagens = new();
+    private List<MensagemUsuarioListaDTO> _mensagensFiltradas = new();
+    private ElementReference _referenciaContainerMensagens;
+    private System.Timers.Timer _debounceTimer;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetMensagens();
+    }
+
+    private void OnInputChanged(ChangeEventArgs e)
+    {
+        _textoFiltro = e.Value.ToString();
+
+        _debounceTimer?.Stop();
+        _debounceTimer?.Dispose();
+
+        _debounceTimer = new System.Timers.Timer
+            {
+                Interval = 500,
+                AutoReset = false
+            };
+        _debounceTimer.Elapsed += async (sender, args) =>
+        {
+            await InvokeAsync(async () =>
+            {
+                await FiltrarMensagens();
+                StateHasChanged();
+            });
+        };
+        _debounceTimer.Start();
+    }
+
+    private async Task GetMensagens()
+    {
+        _mensagens = await Http.GetFromJsonAsync<List<MensagemUsuarioListaDTO>>("api/v1/MensagemUsuario");
+        _mensagensFiltradas = _mensagens;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool primeiraRenderizacao)
+    {
+        if (primeiraRenderizacao)
+        {
+            await RolarParaBaixoAsync();
+        }
+    }
+
+    private async Task FiltrarMensagens()
+    {
+        if (string.IsNullOrWhiteSpace(_textoFiltro))
+        {
+            _mensagensFiltradas = _mensagens;
+        }
+        else
+        {
+            _mensagensFiltradas = _mensagens
+                .Where(m => m.Mensagem.Contains(_textoFiltro, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+        }
+    }
+
+    private async Task EnviarMensagem()
+    {
+        if (!string.IsNullOrWhiteSpace(_conteudoNovaMensagem))
+        {
+            var novaMensagem = new MensagemUsuarioDTO
+                {
+                    Mensagem = _conteudoNovaMensagem
+                };
+
+            var response = await Http.PostAsJsonAsync("api/v1/MensagemUsuario", novaMensagem);
+            if (response.IsSuccessStatusCode)
+            {
+                _conteudoNovaMensagem = string.Empty;
+                await GetMensagens();
+                await RolarParaBaixoAsync();
+            }
+        }
+    }
+
+    private async Task RemoverMensagem(int id)
+    {
+        var response = await Http.DeleteAsync($"api/v1/MensagemUsuario/{id}");
+        if (response.IsSuccessStatusCode)
+        {
+            await GetMensagens();
+            await FiltrarMensagens();
+            StateHasChanged();
+        }
+        else
+        {
+            _erro = "Erro ao excluir a mensagem.";
+        }
+    }
+
+    private async Task RolarParaBaixoAsync()
+    {
+        await Task.Delay(100);
+        await _referenciaContainerMensagens.FocusAsync();
+    }
+}

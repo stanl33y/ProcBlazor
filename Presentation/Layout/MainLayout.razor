@@ -1,8 +1,94 @@
-﻿@inherits LayoutComponentBase
+﻿@using ProcBlazor.Presentation.Providers
+@inherits LayoutComponentBase
+@using System.Web.Http
+@using Blazored.LocalStorage
+@using Microsoft.AspNetCore.Components.Authorization
+@inject ILocalStorageService localStorage
+@inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider AuthStateProvider
+
 <div class="page">
-    <main>
-        <article class="content px-4">
+    <AuthorizeView>
+        <nav class="navbar navbar-expand navbar-light bg-light p-4">
+            <a class="navbar-brand" href="#">ProcBlazor</a>
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <NavLink class="nav-link btn btn-link" href="/inicio" ActiveClass="active" @onclick="IrParaHome">Início</NavLink>
+                </li>
+                <li class="nav-item">
+                    <NavLink class="nav-link btn btn-link" href="/mensagens" ActiveClass="active" @onclick="IrParaMensagens">Mensagens</NavLink>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-link" href="#" @onclick="Logout">Sair</a>
+                </li>
+            </ul>
+            <span class="navbar-text text-primary">Olá, @_nomeUsuario</span>
+        </nav>
+    </AuthorizeView>
+    <div class="p-4">
+        <main>
             @Body
-        </article>
-    </main>
+        </main>
+    </div>
 </div>
+
+@code {
+    private string _nomeUsuario = string.Empty;
+
+    protected override void OnInitialized()
+    {
+        AuthStateProvider.AuthenticationStateChanged += OnAuthenticationStateChanged;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetDadosUsuario();
+    }
+
+    private async Task GetDadosUsuario()
+    {
+        var authState = await ((StAuthStateProvider)AuthStateProvider).GetAuthenticationStateAsync();
+
+        var user = authState.User;
+
+        if (!user.Identity.IsAuthenticated)
+        {
+            NavigationManager.NavigateTo("/login");
+        }
+
+        var nomeClaim = user.Claims.FirstOrDefault(c => c.Type == "name");
+        if (nomeClaim != null)
+        {
+            _nomeUsuario = nomeClaim.Value;
+        }
+    }
+
+    private async void OnAuthenticationStateChanged(Task<AuthenticationState> task)
+    {
+        InvokeAsync(StateHasChanged);
+
+        await GetDadosUsuario();
+    }
+
+    public void Dispose()
+    {
+        AuthStateProvider.AuthenticationStateChanged -= OnAuthenticationStateChanged;
+    }
+
+    private async void IrParaHome()
+    {
+        NavigationManager.NavigateTo("/mensagens");
+    }
+
+
+    private async void IrParaMensagens()
+    {
+        NavigationManager.NavigateTo("/mensagens");
+    }
+
+    private async void Logout()
+    {
+        await ((StAuthStateProvider)AuthStateProvider).NotifyUserLogout();
+        NavigationManager.NavigateTo("/login");
+    }
+}

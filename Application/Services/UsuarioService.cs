@@ -9,6 +9,7 @@ public interface IUsuarioService
 {
     Task<IEnumerable<Usuario>> GetAllAsync();
     Task<Usuario> GetByIdAsync(int id);
+    Task<Usuario> GetByEmailAsync(string email);
     Task AddAsync(Usuario usuario);
     Task UpdateAsync(Usuario usuario);
     Task DeleteAsync(int id);
@@ -28,6 +29,7 @@ public class UsuarioService : IUsuarioService
 
     public async Task<Usuario> GetByIdAsync(int id) => await _unitOfWork.UsuarioRepository.GetByIdAsync(id);
 
+    public async Task<Usuario> GetByEmailAsync(string email) => await _unitOfWork.UsuarioRepository.GetUsuarioByEmailAsync(email);
     public async Task AddAsync(Usuario usuario)
     {
         usuario.Senha = HashPassword(usuario.Senha);

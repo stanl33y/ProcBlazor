@@ -23,7 +23,7 @@ public class AuthController : Controller
         
         if (usuario == null) return Unauthorized();
 
-        var token = _jwtAuthenticationService.GenerateToken(usuario.Email, "admin");
+        var token = _jwtAuthenticationService.GenerateToken(usuario.Email, usuario.Nome, "admin");
 
         return Ok(new { token });
     }

@@ -9,6 +9,7 @@ public class UnitOfWork : IUnitOfWork
     private readonly IDbConnection _connection;
     private IDbTransaction _transaction;
     private IUsuarioRepository _usuarioRepository;
+    private IMensagemUsuarioRepository _mensagemUsuarioRepository;
     private bool _disposed;
 
     public UnitOfWork(string connectionString)
@@ -19,6 +20,7 @@ public class UnitOfWork : IUnitOfWork
     }
 
     public IUsuarioRepository UsuarioRepository => _usuarioRepository ??= new UsuarioRepository(_connection, _transaction);
+    public IMensagemUsuarioRepository MensagemUsuarioRepository => _mensagemUsuarioRepository ??= new MensagemUsuarioRepository(_connection, _transaction);
 
     public async Task<int> CommitAsync()
     {

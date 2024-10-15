@@ -17,6 +17,7 @@ public class JwtAuthorizationMessageHandler : DelegatingHandler
 
         if (!string.IsNullOrEmpty(token))
         {
+            token = token.Trim('"').Replace("\n", "").Replace("\r", "");
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
         }
 
