@@ -42,7 +42,7 @@ CREATE INDEX IdUsuario ON mensagens (IdUsuario);
 Para clonar o repositório, execute o seguinte comando:
 
 ```bash
-git clone https://github.com/seu-usuario/seu-repositorio.git
+git clone git@github.com:stanl33y/ProcBlazor.git
 ```
 
 ## Configuração da API
